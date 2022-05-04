@@ -1,0 +1,95 @@
+
+git open source tool
+
+can be installed on any OS, same commands will work on every OS
+
+Install git
+
+connect edureka lab:
+
+git is already installed
+
+
+new Ec2 machine AWS
+
+command is:
+
+$ yum install git -y
+
+$ apt-get install git -y
+
+
+ON lab:
+
+click on terminal
+
+execute command:
+
+$ sudo su -
+
+$ git --version
+
+
+Scenario 1: Create a local repo
+
+$ mkdir myproject
+$ cd myproject
+$ touch index1.html index2.html
+$ git init
+created a local repo
+
+Scenario 2: Git configuration to add username and email details
+
+ $ git config --global user.name sonal0409
+
+ $ git config --global user.email mittal.sonal04@gmail.com
+
+ $ git config --list
+
+ $ cat ~/.gitconfig
+
+Scenario 3: Add files to local repo
+
+$ git add index1.html
+
+$ git commit -m "add file"
+
+to check files in local repo
+
+$ git ls-files
+
+Scenario 4: git log
+
+$ git log
+$ git log --oneline
+
+$ git show <commitid>
+
+$ git show 8020b67
+
+**********
+Scenario 5: Modify an exisitng file, which is already in Local repo
+
+add the modification to LR
+
+
+1 method:
+
+$ git add index1.html
+$ git commit -m "modification"
+
+
+add the modification to LR
+
+2nd method:(using -a option: add all the changes & commit it)
+
+$ git commit -a -m "modification index2.html"
+
+
+************
+
+Scenario 6: to check difference between 2 version of a file
+
+$ git diff filename
+
+$ git diff commit1 commit2
