@@ -244,6 +244,53 @@ which version Java to use
 
 Configure version of maven to be used 
 
+Delivery Pipeline in Jenkins
+
+*******************************
+
+Jenkins--> Manage Jenkins-->Global Tool configuration
+
+Go to JDK section
+In this give:
+1. Uncheck -- install automatically
+2. JDK name as myjava
+3. Go to server type 
+give mvn --version
+JAVA_HOME ==> will give java location
+JAVA_HOME =
+
+
+Save it.
+
+Under GIT==> leave it same 
+
+Under maven ==> lets install it automatically
+Type mymaven and check the install automatically box.
+Save the changes
+
+
+****************************************
+
+CREATION OF COMPILE JOB
+***********************************
+
+1. new Job --complie-->freestyle project
+2. Source code management --> select git
+--->give git path ===> https://github.com/Sonal0409/DevOpsClassCodes.git
+
+3. build ==> select invoke top level maven targets
+   select maven version===> mymaven
+    goal ==> compile
+4. save ==> build now 
+So all the compiled files will be present at this location
+==> look for this line in console output at the end on jenkins
+Compiling 13 source files to /var/lib/jenkins/workspace/compile1/target/classes
+
+5. Go to workspace on the left side of jenkins Job compile
+In the folder go to ==> target folder==> go to classes/com/edurekademo
+==> click on edurekademo==> got to utilities==> all class files will be there which have recently been compiled.
+******************************
+
 
 
 
