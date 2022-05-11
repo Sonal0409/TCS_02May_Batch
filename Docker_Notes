@@ -1,0 +1,344 @@
+
+Docker Notes:
+*************
+
+$ sudo su -
+
+Install docker:
+
+Centos:
+
+ $ yum install docker -y
+
+Ubuntu
+
+ ### INSTALL DOCKER 
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update ; clear
+sudo apt-get install -y docker-ce
+
+
+Start Docker:
+
+systemctl start docker
+
+
+Images:
+
+  Base Images:
+
+   Images provided by docker on dockerhub
+
+Name of an Image
+*************
+every Image :
+
+ will have a :   name & tag
+
+
+every image has the following name:
+
+   RegistryName/repository_Name/ImageName:tagname
+
+Example:
+
+  ubuntu:18.04 ===> full name is  ===> docker.io/library/ubuntu:18.04
+
+  ubuntu ==> docker.io/library/ubuntu:latest
+
+example:
+
+  Create your own image :  sonalimage , version v1 
+  private registry : 1.2.3.4:5000
+
+
+  Name of the image will be:
+
+    1.2.3.4:5000/repo1/sonalimage:v1
+
+
+****************
+
+Pull the image from registry - Docker hub
+
+
+ $ docker pull ubuntu
+
+ $ docker pull tomcat:7
+
+pull image to local machine, dockerhost
+
+
+**************
+Delete an Image locally
+
+$ docker rmi imagename:tagname
+
+ $ docker rmi ubuntu
+
+ $ docker rmi tomcat:7
+
+$ docker images
+$ docker image ls
+
+
+****************
+Create a Container from an Image
+
+$ docker run imagename
+
+ run ===> check if image is available locally or not
+     ===> if image is not available locally, it will pull the image form docker hub
+
+     ===> then run the image to create conatiner
+
+ RUN ==> (pull+ run)
+
+$ docker run ubuntu
+
+$ to see the containers on docker host
+
+ $ docker ps -a
+
+
+***************
+
+run command options:
+
+1. Run the container with a mode:
+
+ 1. foreground mode  ==> -it
+
+=> container will be created
+=> container status will be up & running
+=> user will attached to terminal of the container
+
+Example:
+
+    $  docker run -it ubuntu
+
+
+comout of container once attached to it
+
+ 2 methods:
+
+1. ctlp+ctlq
+
+  > user will comout of container and container will be up & running
+
+docker ps -a
+
+
+2. exit
+
+  > user will comout of container and container will be exited
+
+
+2. detached mode     ==> -d
+
+=> container will be created
+=> container status will be up & running
+=> user will detached to the container
+=> container will be running on the host machine 
+
+
+
+       docker run -d nginx
+
+
+2. give a name to your container
+
+ --name is the option
+
+
+example:
+
+
+    $ docker run --name c1 -it ubuntu
+
+
+   $ docker run --name n1 -d nginx
+
+ Attach to the container again
+
+$ docker attach conatinername/id
+
+
+Execute a command on the container
+
+$ docker exec -it n1 bash
+
+
+$ docker exec c1 uname
+
+
+Describe all the details of the container created:
+
+$ docker inspect containername/id
+
+
+delete all containers:
+
+$ docker rm -f $(docker ps -aq)
+
+
+Port mapping or Port forwarding:
+
+Access the container:
+
+Communicate with your container from outside of host machine
+
+using the port number, you can access your containers
+
+
+Port forwarding has to be done at runtime, when creating the container
+
+port forward option is  : -p & -P
+
+with por forward option, also mention:  systemport:containerport
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
