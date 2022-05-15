@@ -1,0 +1,124 @@
+
+Object definition files
+
+
+Object : Pod, ReplicaSet, Sevrcies, Deployment, Stateful sets, PV, PVC, DemonSets,Configmaps,namespaces
+
+ApiVersion: v1, apps/v1, v1, apps/v1
+
+Object defintion file - YAML
+
+4 section:
+
+ kind: kind of object you want to create
+ apiVersion: code scehama needed to create the desired object
+ metadata: name & labels about your object
+ spec: what should be created on the pod: container, image, volume, port
+
+  514  mkdir 13May
+  515  cd 13May
+  516  ls
+  517  vim pod-defintion.yml
+
+kind: Pod
+apiVersion: v1
+metadata:
+ name: pod2
+ labels:
+  app: nginxapp
+  author: sonal
+  env: qa
+spec:
+ containers:
+  - name: c1
+    image: nginx
+
+  519  kubectl create -f pod-defintion.yml
+
+  521  kubectl get pods
+  522  kubectl get pods -o wide
+  523  kubectl delete pods --all
+
+  525  kubectl explain ReplicaSet
+
+
+
+Object 2: ReplicaSet : that will create multiple pods /replicas on the clusters
+
+Obejct defintion file
+
+ 531  vim ReplicaSet.yml
+
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+ name: myrs
+spec:
+ replicas: 5
+ selector:
+  matchLabels:
+   type: webserver
+ template:
+  metadata:
+   name: pod1
+   labels:
+    app: java
+    type: webserver
+    author: sonal
+  spec:
+   containers:
+    - name: c1
+      image: nginx
+
+
+kubectl create -f ReplicaSet.yml
+
+kubectl get all
+
+
+
+
+Object 3 : Service : to do port mapping to pods
+
+Acces the pods running in the cluster from browser(outside cluster)
+
+NodePort
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysvc
+spec:
+ type: NodePort
+ ports:
+ - targetPort: 80
+   port: 80
+   nodePort: 30008
+ selector:
+  type: webserver
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
