@@ -99,6 +99,175 @@ spec:
   type: webserver
   
   
+Object 4: Deployment
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kubeserve
+spec:
+  replicas: 3
+  minReadySeconds: 10 # wait for 45 sec before going to deploy next pod
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1  
+      maxSurge: 1        # max number of pods to run for the deployment
+  selector:
+    matchLabels:
+      app: kubeserve
+  template:
+    metadata:
+      name: kubeserve
+      labels:
+        app: kubeserve
+    spec:
+      containers:
+       - name: app
+         image: leaddevops/kubeserve:v1
+        
+---
+kind: Service
+apiVersion: v1
+metadata:
+   name: kubeserve-svc
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+  selector: 
+    app: kubeserve
+
+
+  506  kubectl get all
+  507  kubectl create -f https://raw.githubusercontent.com/Sonal0409/DevOps_ClassNotes/master/Kubernetese/deployment.yml
+  508  kubectl get all
+  509  clear
+  510  kubectl get pods
+  511  kubectl get service
+  512  kubectl describe deployment kubeserve | less
+  513  kubectl get nodes -o wide
+  514  clear
+  515  kubectl get service
+  516  kubectl det image deployment kubeserve app=leaddevops/kubeserve:v2
+  517  kubectl set image deployment kubeserve app=leaddevops/kubeserve:v2
+  518  kubectl rollout status deployment kubeserve
+  519  kubectl set image deployment kubeserve app=leaddevops/kubeserve:v3
+  520  kubectl rollout status deployment kubeserve
+  521  kubectl rollout undo deployment kubeserve
+
+
+Prsistent Volumes & persistent volume claim:
+********
+
+preserve the data of pod directory in store of cappacity 1 GB
+
+where ever the pods is created on that slave preserve its data at a directory /tmp/data
+
+
+1. Create a persistent volume
+
+type of volume : hostPath
+location: /tmp/data
+capacity: 1 GB
+accessMode: readwriteOnce
+
+$ kubectl create -f https://raw.githubusercontent.com/Sonal0409/DevOps_ClassNotes/master/Kubernetese/PersistentVolume/pv.yml
+
+$ kubectl get pv
+
+2. Create a Claim
+
+$ kubectl create -f https://raw.githubusercontent.com/Sonal0409/DevOps_ClassNotes/master/Kubernetese/PersistentVolume/pod-pvc.yml
+
+$ kubectl get pvc
+
+3. Create a pod and map volume to it
+
+wherever the pod is created, volume directory will there on the slave.. and container data will be preserved
+
+$ kubectl create -f https://raw.githubusercontent.com/Sonal0409/DevOps_ClassNotes/master/Kubernetese/PersistentVolume/pod-pvc.yml
+
+$ kubectl get pods
+
+
+
+Namespaces:
+
+587  kubectl create namespace sonal
+  588  kubectl get namespaces
+
+  590  kubectl run pod1 --image nginx
+
+kubectl run pod2 --image nginx -n sonal
+
+kubectl get pods -n sonal
+
+
+kubectl delete pods --all
+
+kubectl delete pods --all -n sonal
+
+
+YAML to create namespace
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sonal
+
+---
+
+
+Use of namespace on the object
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    k8s-app: dashboard-metrics-scraper
+  name: dashboard-metrics-scraper
+  namespace: sonal
+spec:
+  replicas: 1
+
+
+Kubernetes dashboard:
+**************
+
+YAML file given by kubernetes - dashboard
+
+deploy the dashboard yaml file
+
+kubectl create -f https://raw.githubusercontent.com/Sonal0409/DevOps_ClassNotes/master/Kubernetese/dashboard-insecure.yml
+
+
+
+
+kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://10.8.3.137:80/; done"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
