@@ -1,0 +1,56 @@
+github:
+
+https://github.com/
+
+Maven:
+
+https://maven.apache.org/plugins/index.html
+
+jenkins:
+
+https://www.jenkins.io/doc/
+https://www.jenkins.io/doc/book/pipeline/syntax/
+
+Docker:
+https://docs.docker.com/get-started/
+https://docs.docker.com/engine/reference/builder/
+https://docs.docker.com/compose/
+https://docs.docker.com/engine/swarm/raft/
+
+Kubernetes:
+
+https://kubernetes.io/docs/concepts/workloads/pods/
+https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+https://kubernetes.io/docs/concepts/storage/volumes/
+
+
+Ansible:
+
+https://docs.ansible.com/ansible/2.8/modules/list_of_all_modules.html
+
+https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html
+
+
+Terraform:
+
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+
+
+Repo Link for notes:
+https://github.com/Sonal0409/TCS_02May_Batch
+
+
+master repo for Sonal notes
+
+https://github.com/Sonal0409/DevOps_ClassNotes
+
+Repo for Java code to execute the project statement
+
+https://github.com/Sonal0409/DevOpsClassCodes
+
+Terraform - certifaction
+
+https://github.com/Sonal0409/terraformLabs
