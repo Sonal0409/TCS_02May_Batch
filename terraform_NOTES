@@ -1,0 +1,136 @@
+
+UserCase1:
+
+Configure the provider 
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "AKIAQN2UCWBUL4NS4RB6"
+  secret_key = "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"
+}
+
+UseCase2: Using terraform create an ec2 instance on AWS
+
+you will now be creating a resource => resource block
+
+resource will have a name & will have attributes
+
+while creating the resource you will provide the mandatory attributes/arguments
+
+
+resource "aws_instance" "myec2" {
+  ami = "ami-0ca285d4c2cda3300"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Instance1"
+  }
+}
+
+
+$ terraform apply
+
+and give yes
+
+
+Usercase3: Create an elastic ip on AWS
+************
+
+
+
+resource "aws_eip" "eip1" {
+  vpc      = true
+}
+
+
+UserCase4: Associate elastic ip to an exisitng Instance
+
+********
+
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.myec2.id
+  allocation_id = aws_eip.eip1.id
+}
+
+
+useCase5:  To create an EC2 Instance and connect to it(SSH), after that i want to install nginx server onit. Start nginx
+*********
+
+Create ec2 instance
+
+Create a key pair - using which we will connect to the instance
+
+provisioners: remote-exec
+
+use: keypair & ssh connection
+
+inline : mention set of commands to be executed
+
+
+UserCase 5:
+
+variables in terraform
+
+
+
+  access_key = "AKIAQN2UCWBUL4NS4RB6"
+  secret_key = "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"
+
+
+ ami = "ami-0ca285d4c2cda3300"
+  instance_type = "t2.micro"
+
+
+
+ accesskey="AKIAQN2UCWBUL4NS4RB6"
+ secretkey="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"
+ ami="ami-0ca285d4c2cda3300"
+ instance="t2.micro"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
