@@ -1,0 +1,110 @@
+adhoc commands
+
+ansible all -m shell -a "uptime"
+
+ansible all -m command -a "df -h"
+
+
+Create a file with content using copy module
+
+$ ansible webserver -m copy -a "content='hello from ACM' dest=/tmp/hello.txt"
+
+=> get only information about single fact variable
+
+ansible localhost -m setup -a "filter=ansible_mounts"
+
+ansible localhost -m setup -a "filter=ansible_architecture"
+
+
+***********
+
+Playbook1.yml
+
+- hosts: localhost
+  become: true
+  become_user: root
+  tasks:
+  - name: install apache2
+    apt: name=apache2 state=present
+  - name: start apache2
+    service: name=apache2 state=started
+  - name: Deploy index file
+    copy: src=index.html dest=/var/www/html
+    notify: restart httpd
+  handlers:
+  - name: restart httpd
+    service: name=apache2 state=restarted
+
+Create index.html file in current directory.
+
+# systemctl status apache2
+
+
+Ansible Roles:
+*******
+
+Ansible-galaxy is a command in ansible to create a role automatically
+
+cd roles
+sudo ansible-galaxy init demor
+
+ls
+
+all the directories will be there.
+
+No lets write tasks in tasks directory
+
+$ vim tasks/main.yml
+
+- name: copy demor file
+  template:
+   src: templates/demor.j2
+   dest: /etc/demor
+   owner: root
+   group: root
+   mode: 0444
+:wq!
+
+$ vim templates/demor.j2
+
+Welcome to  {{ansible_hostname}}
+
+This file was created on {{ansible_date_time.date}}
+
+Contact {{system_manager}} if anything is wrong
+
+
+$ sudo vim defaults/main.yml
+
+---
+# defaults file for demor
+#
+
+system_manager: default@default.com
+
+You can dleete all the unwanted folders that you are not using in the roles
+
+Use the role
+
+create a playbook
+
+- hosts: localhost
+  become: true
+  become_user: root
+  roles:
+  - demor
+
+ansible-playbook playbook2.yml
+
+Now go to cat /etc/demor
+
+you will see file with following content in it
+
+mittalsonal04gm@ip-172-31-17-213:/etc$ cat demor
+
+Welcome to  ip-172-31-17-213
+
+This file was created on 2022-03-30
+
+Contact default@default.com if anything is wrong
+
